@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LoggerService;
 
 namespace Repository.Repository.Implementation
 {
@@ -28,8 +29,9 @@ namespace Repository.Repository.Implementation
                 await _db.SaveChangesAsync();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.Write(ex.Message);
                 return false;
             }
         }
@@ -42,8 +44,9 @@ namespace Repository.Repository.Implementation
                 _db.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.Write(ex.Message);
                 return false;
             }
         }
@@ -71,8 +74,9 @@ namespace Repository.Repository.Implementation
                 _db.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.Write(ex.Message);
                 return false;
             }
         }

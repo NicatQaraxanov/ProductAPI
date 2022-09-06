@@ -1,4 +1,5 @@
 ﻿using DomainModels.Models;
+using LoggerService;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Repository.Abstraction;
 
@@ -27,8 +28,9 @@ namespace ProductApi.Controllers
                 var products = await _repository.GetAllAsync();
                 return Ok(products);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.Write(ex.Message);
                 return NotFound();
             }
         }
@@ -42,8 +44,9 @@ namespace ProductApi.Controllers
                 var product = await _repository.GetAsync(id);
                 return Ok(product);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.Write(ex.Message);
                 return NotFound();
             }
         }
@@ -70,13 +73,15 @@ namespace ProductApi.Controllers
                     var result = _repository.Update(product);
                     return Ok();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Logger.Write(ex.Message);
                     return BadRequest("Something bad happened");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.Write(ex.Message);
                 return NotFound("Product with this id doesnt exist");
             }
         }
@@ -95,11 +100,13 @@ namespace ProductApi.Controllers
                 }
                 catch (Exception ex)
                 {
+                    Logger.Write(ex.Message);
                     return BadRequest(ex.Message);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.Write(ex.Message);
                 return NotFound("Product with this id doesnt exist");
             }
         }

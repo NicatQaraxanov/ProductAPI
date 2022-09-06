@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainModels", "DomainModel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{7F9F4E65-C159-4497-9EC7-48AB2F1DBB9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidatorService", "ValidatorService\ValidatorService.csproj", "{3FEBAC76-163F-4717-9414-F675735F3C91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValidatorService", "ValidatorService\ValidatorService.csproj", "{3FEBAC76-163F-4717-9414-F675735F3C91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "Logger\LoggerService.csproj", "{BDAFF4AF-E3D1-4E51-8D2C-99154FBC7F3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3FEBAC76-163F-4717-9414-F675735F3C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FEBAC76-163F-4717-9414-F675735F3C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FEBAC76-163F-4717-9414-F675735F3C91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDAFF4AF-E3D1-4E51-8D2C-99154FBC7F3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDAFF4AF-E3D1-4E51-8D2C-99154FBC7F3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDAFF4AF-E3D1-4E51-8D2C-99154FBC7F3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDAFF4AF-E3D1-4E51-8D2C-99154FBC7F3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
