@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DomainModels\DomainModels.csproj" />
+    <ProjectReference Include="..\Logger\LoggerService.csproj" />
   </ItemGroup>
 
 </Project>

@@ -31,7 +31,6 @@ namespace Repository.Repository.Implementation
             }
             catch (Exception ex)
             {
-                Logger.Write(ex.Message);
                 return false;
             }
         }

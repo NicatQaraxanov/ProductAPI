@@ -11,7 +11,7 @@ namespace DomainModels.Models
     {
         public string ProductName { get; set; }
 
-        public int ProductCategoryId { get; set; }
+        public int? ProductCategoryId { get; set; }
 
         public ProductCategory ProductCategory { get; set; }
 
@@ -19,7 +19,7 @@ namespace DomainModels.Models
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
-        public string State { get; set; }
+        public string? State { get; set; }
 
         public bool IsDeleted { get; set; }
     }

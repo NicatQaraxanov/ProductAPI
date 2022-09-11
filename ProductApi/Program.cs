@@ -19,6 +19,8 @@ namespace ProductApi
 
             builder.Services.AddControllers();
 
+            builder.Services.AddFluentValidation();
+
             builder.Services.AddValidatorsFromAssemblyContaining<ProductValidator>();
             builder.Services.AddValidatorsFromAssemblyContaining<ProductCategoryValidator>();
 
