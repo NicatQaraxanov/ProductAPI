@@ -11,9 +11,9 @@ namespace DomainModels.Models
     {
         public string ProductName { get; set; }
 
-        public int? ProductCategoryId { get; set; }
+        public int ProductCategoryId { get; set; }
 
-        public ProductCategory ProductCategory { get; set; }
+        public ProductCategory? ProductCategory { get; set; }
 
         public double Price { get; set; }
 

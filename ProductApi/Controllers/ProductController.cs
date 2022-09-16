@@ -1,5 +1,6 @@
 ﻿using DomainModels.Models;
 using LoggerService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Repository.Abstraction;
 
@@ -9,6 +10,7 @@ namespace ProductApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductController : ControllerBase
     {
 
@@ -57,7 +59,7 @@ namespace ProductApi.Controllers
         {
             var result = await _repository.AddAsync(product);
             if (!result)
-                return BadRequest("Somethind bad happened");
+                return BadRequest("Something bad happened");
             return Ok();
         }
 

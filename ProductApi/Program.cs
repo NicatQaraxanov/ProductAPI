@@ -6,6 +6,12 @@ using Repository.DAL;
 using Repository.Repository.Abstraction;
 using Repository.Repository.Implementation;
 using ValidatorService.Validators;
+using AuthService;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ProductApi
 {
@@ -37,6 +43,32 @@ namespace ProductApi
             });
 
             builder.Services.AddScoped(typeof(IRepository<>), typeof(ProductApiRepository<>));
+            builder.Services.AddScoped(typeof(ILoginRegister), typeof(LoginRegister));
+
+            builder.Services.AddSwaggerGen(options => {
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Description = "Standard Authorization header using the Bearer scheme (\"bearer {token}\")",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
+            });
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+                            .GetBytes("My first top secret key")),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
+
 
             var app = builder.Build();
 
@@ -48,6 +80,8 @@ namespace ProductApi
             }
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

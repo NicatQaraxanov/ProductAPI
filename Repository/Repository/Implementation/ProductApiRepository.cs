@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LoggerService;
+using DomainModels.Models;
 
 namespace Repository.Repository.Implementation
 {
@@ -16,21 +17,25 @@ namespace Repository.Repository.Implementation
 
         protected readonly ProductAppDbContext _db;
 
+        private DbSet<T> table = null;
+
         public ProductApiRepository(ProductAppDbContext db)
         {
             _db = db;
+            table = _db.Set<T>();
         }
 
         public async Task<bool> AddAsync(T item)
         {
             try
             {
-                await _db.Set<T>().AddAsync(item);
+                await table.AddAsync(item);
                 await _db.SaveChangesAsync();
                 return true;
             }
             catch (Exception ex)
             {
+                Logger.Write(ex.Message);
                 return false;
             }
         }
@@ -39,7 +44,7 @@ namespace Repository.Repository.Implementation
         {
             try
             {
-                _db.Set<T>().Remove(item);
+                table.Remove(item);
                 _db.SaveChanges();
                 return true;
             }
@@ -52,24 +57,37 @@ namespace Repository.Repository.Implementation
 
         public async Task<IList<T>> GetAllAsync()
         {
-            if (_db.Set<T>().Count() == 0)
+            if (table.Count() == 0)
                 throw new Exception("There are no existing product");
-            return await _db.Set<T>().ToListAsync();
+            return await table.ToListAsync();
         }
 
         public async Task<T> GetAsync(int Id)
         {
-            var product = await _db.Set<T>().FirstOrDefaultAsync(p => p.Id == Id);
+            var product = await table.FirstOrDefaultAsync(t => t.Id == Id);
             if(product == null)
                 throw new Exception("The given product id is invalid");
             return product;
+        }
+
+        public T GetByUsername(string Username)
+        {
+            try
+            {
+                var user = table.FirstOrDefault(u => (u as User).Username == Username);
+                return user;
+            }
+            catch (Exception)
+            {
+                return null;
+            };
         }
 
         public bool Update(T item)
         {
             try
             {
-                _db.Set<T>().Update(item);
+                table.Update(item);
                 _db.SaveChanges();
                 return true;
             }

@@ -13,6 +13,8 @@ namespace Repository.Repository.Abstraction
 
         Task<T> GetAsync(int Id);
 
+        T GetByUsername(string Username);
+
         Task<bool> AddAsync(T item);
 
         bool Update(T item);
